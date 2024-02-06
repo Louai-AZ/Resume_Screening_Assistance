@@ -10,6 +10,8 @@ if 'unique_id' not in st.session_state:
 
 
 def main():
+    
+    # help us get the API keys from .env file
     load_dotenv()
 
     st.set_page_config(page_title="Resume Screening Assistance")
@@ -43,10 +45,10 @@ def main():
             # Fecth relavant documents from PINECONE
             relavant_docs=similar_docs(job_description,document_count,"e697b71c-d5ed-4c66-8625-ac1c403a2df1","us-west1-gcp-free","test",embeddings,st.session_state['unique_id'])
 
-            #t.write(relavant_docs)
 
             # Introducing a line separator
             st.write(":heavy_minus_sign:" * 30)
+
 
             # For each item in relavant docs - we are displaying some info of it on the UI
             for item in range(len(relavant_docs)):
@@ -65,7 +67,7 @@ def main():
                     summary = get_summary(relavant_docs[item][0])
                     st.write("**Summary** : "+summary)
 
-        st.success("Hope I was able to save your time")
+        st.success("Hope I was able to save your time!")
 
 
 # Invoking main function
