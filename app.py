@@ -11,7 +11,6 @@ if 'unique_id' not in st.session_state:
 
 def main():
     
-    # help us get the API keys from .env file
     load_dotenv()
 
     st.set_page_config(page_title="Resume Screening Assistance")
@@ -33,7 +32,6 @@ def main():
             # Create a documents list out of all the user uploaded pdf files
             final_docs_list=create_docs(pdf,st.session_state['unique_id'])
 
-            # Displaying the count of resumes that have been uploaded
             st.write("*Resumes uploaded* :"+str(len(final_docs_list)))
 
             # Create embeddings instance
@@ -45,8 +43,6 @@ def main():
             # Fecth relavant documents from PINECONE
             relavant_docs=similar_docs(job_description,document_count,"e697b71c-d5ed-4c66-8625-ac1c403a2df1","us-west1-gcp-free","test",embeddings,st.session_state['unique_id'])
 
-
-            # Introducing a line separator
             st.write(":heavy_minus_sign:" * 30)
 
 
@@ -61,7 +57,6 @@ def main():
                 # Introducing Expander feature
                 with st.expander('Show me 👀'): 
                     st.info("**Match Score** : "+str(relavant_docs[item][1]))
-                    #st.write("***"+relavant_docs[item][0].page_content)
                     
                     # Gets the summary of the current item using 'get_summary' function that we have created which uses LLM & Langchain chain
                     summary = get_summary(relavant_docs[item][0])
@@ -70,6 +65,6 @@ def main():
         st.success("Hope I was able to save your time!")
 
 
-# Invoking main function
+
 if __name__ == '__main__':
     main()
