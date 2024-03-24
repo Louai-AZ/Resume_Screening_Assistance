@@ -1,5 +1,6 @@
 import streamlit as st
 from dotenv import load_dotenv
+import os
 from utils import *
 import uuid
 
@@ -9,9 +10,13 @@ if 'unique_id' not in st.session_state:
     st.session_state['unique_id'] =''
 
 
+
 def main():
     
     load_dotenv()
+    PINECONE_API_KEY = os.environ.get('PINECONE_API_KEY')
+    PINECONE_API_ENV = os.environ.get('PINECONE_API_ENV')
+    index_name = os.environ.get('index_name')
 
     st.set_page_config(page_title="Resume Screening Assistance")
     st.title("HR - Resume Screening Assistance 💁 ")
@@ -26,7 +31,7 @@ def main():
     if submit:
         with st.spinner('Wait for it...'):
 
-            # Creating a unique ID, so that we can use to query and get only the user uploaded documents from PINECONE vector store
+            # Creating a unique ID, so that we can use to query and get only the user uploaded documents from PINECONE 
             st.session_state['unique_id']=uuid.uuid4().hex
 
             # Create a documents list out of all the user uploaded pdf files
@@ -38,10 +43,10 @@ def main():
             embeddings=create_embeddings_load_data()
 
             # Push data to PINECONE
-            push_to_pinecone("e697b71c-d5ed-4c66-8625-ac1c403a2df1","us-west1-gcp-free","test",embeddings,final_docs_list)
+            push_to_pinecone(PINECONE_API_KEY,PINECONE_API_ENV,index_name,embeddings,final_docs_list)
 
             # Fecth relavant documents from PINECONE
-            relavant_docs=similar_docs(job_description,document_count,"e697b71c-d5ed-4c66-8625-ac1c403a2df1","us-west1-gcp-free","test",embeddings,st.session_state['unique_id'])
+            relavant_docs=similar_docs(job_description,document_count,PINECONE_API_KEY,PINECONE_API_ENV,index_name,embeddings,st.session_state['unique_id'])
 
             st.write(":heavy_minus_sign:" * 30)
 

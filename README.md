@@ -15,11 +15,12 @@ conda activate HRenv
 ```ini
 pip install -r requirements.txt
 ```
-4. Create a `.env` file in the root directory and add your OpenAI API key and HuggingFace API token :
+4. Create a `.env` file in the root directory and add your Pinecone credentials as follows :
 
 ```ini
-OPENAI_API_KEY=""
-HUGGINGFACEHUB_API_TOKEN=""
+PINECONE_API_KEY = ""
+PINECONE_API_ENV = ""
+index_name=""
 ```
 
 5. Run :
