@@ -1,5 +1,11 @@
 # Resume_Screening_Assistance
 
+
+## Overview : 
+
+Developed a tool for HR professionals called "Resume Screening Assistance." Built using Python and Streamlit, this application automates the tedious process of screening resumes by leveraging cutting-edge NLP techniques. By integrating OpenAI's language models, Pinecone vector stores, and Sentence Transformers, the tool efficiently extracts information from PDF resumes and matches them with job descriptions, significantly streamlining the hiring process.
+
+
 ## How to run the code :
 
 1. Clone this repository :
