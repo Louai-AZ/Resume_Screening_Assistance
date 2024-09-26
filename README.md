@@ -33,3 +33,11 @@ index_name=""
 ```ini
 streamlit run app.py
 ```
+
+
+## TechStack Used : 
+- Python
+- LangChain
+- Streamlit
+- OpenAI
+- Pinecone Vector Database
